@@ -15,5 +15,5 @@ Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series
 * Simple interrupt handling
 * 8 bit, 16 bit, 8 bit plus offset, 16 bit plus offset addressing modes.
 * 270 different op codes
-* Runs at about 800Khz
+* Runs at about 800Khz; 4 cycles per microcode instruction, each instruction 2-8 microcodes, so 8-32 clock cycles.
 * Arduino Nano as boot / RAM loader; slow clock for debug
