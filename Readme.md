@@ -7,7 +7,8 @@ Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series
 * Auto incrementing program counter.
 * Auto incrementing and decrementing stack pointer on push / pop
 * 8 stage instruction microcode, using single 8K control EEPROM
-* 3 General purpose registers (A,X,Y) One interrupt / jump vector register (V)
+* 3 General purpose 8 bit registers (A,X,Y) One interrupt / jump vector register (V)
+* 2 Internal 8 bit registers (H,L) for ALU input and microcode use only.
 * Constants register, giving 0,1 or -1 (0xff)
 * Conditional jumps and subroutine returns
 * Combined Decrment/Test/Compare and branch instructions
