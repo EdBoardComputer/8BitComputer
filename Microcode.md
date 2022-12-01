@@ -47,3 +47,11 @@ There are also 16 control line for the data to be read FROM the bus as follows :
 16 MTI Stack in. Puts contents at memory pointed to by stack pointer. Stack pointer is incremented.
 
 Each microcode has a maximum total of 8 steps. The 74HC193 step counter is reset to 0 when any instruction containing MI, PCLI, XI, AI or SR is completed.
+
+# Extra Instructions
+
+To go beyond the 256 instruction limit, the wasted steps after all the two step instructions can be accessed, by loading the instruction register twice. Once with 0xff, whose second step is another instruction register load. Hence the extended instruction opcodes are 0xff, followed by the instruction byte.
+
+# Interrupts
+
+These are simply implemented by changing the data loaded into the 74HC193 step counter at the start of the next instruction to start from step 2. Opcode 0x00 is NOP, which is Loads instruction register as step 0, and reset is step 1. Steps 2-7 Saves the PC HI and PC LO onto the stack, Clears PC high, and puts the vector register into PC LO. It also issues Flags out / flags in (which does nothing, and is not used anywhere else), to stop the interrupt triggering again. The next instruction then resumes from the new address.
