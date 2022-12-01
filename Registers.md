@@ -16,7 +16,7 @@ This is implemented with 2 74HC193 counters, cascaded together with increment an
 
 Address Low Register
 
-This is an 74HC574 connected between the data and low 8 bits of the address bus.
+This is an 74HC574 connected between the databus and low 8 bits of the address bus.
 
 Address High Register
 
