@@ -1,11 +1,11 @@
-#Microcode Operation
+# Microcode Operation
 One of the original design goals was to use a single 8K EEPROM for the microcode, this has been achieved, with a fair amount of additional logic. Each microcode step is broken into 4 cycles.
-1.  Phase T1; Everything is turned off, this lets EEPROM output settle to the next microcode as 74HC193 is incremented at the end of phase 4.
-2.  Phase T2; Microcode output is turned on. If a memory output or input is required, the address is loaded to the address bus; else the appropriate register or function is output onto the databus.
-3.  Phase T3; If a memory output is required, the data is output onto the databus. The programme counter is incremented.
-4.  Phase T4; The data is clocked off the databus, into the appropriate register or memory address. Microcode EEPROM turned off. Finally, the 74HC193 address is incremented.
+1  Phase T1; Everything is turned off, this lets EEPROM output settle to the next microcode as 74HC193 is incremented at the end of phase 4.
+2  Phase T2; Microcode output is turned on. If a memory output or input is required, the address is loaded to the address bus; else the appropriate register or function is output onto the databus.
+3  Phase T3; If a memory output is required, the data is output onto the databus. The programme counter is incremented.
+4  Phase T4; The data is clocked off the databus, into the appropriate register or memory address. Microcode EEPROM turned off. Finally, the 74HC193 address is incremented.
 
-#Microcode Logic
+# Microcode Logic
 
 The microcode is built around the notion that the computer must (at a basic level!) just move information from one place to another. Therefore, there are 16 control lines to put information onto the databus, and 16 control lines to take data from the databus. This fits neatly into a 8 bits. These are decoded directly from the EEPROM using 4 74HC138/74HC238 chips.
 
