@@ -4,7 +4,7 @@ There are 10 main registers in the design.
 
 X, Y, A and V registers are all essentially the same. They utilise a single 74HC574 IC with both sides connected to the databus.
 
-The H and L register are slightly different. They utilise a single 74HC574, with the input side connected to the databus. The output side is connected to the ALUBUSA (H Register) or ALUBUSB (L Register) and to two 74HC245 Buffers which connect back to the databus.
+The H and L register are slightly different. They utilise a single 74HC574, with the input side connected to the databus. The output side is connected to the ALUBUSA (H Register) or ALUBUSB (L Register) and to two 74HC245 Buffers which connect back to the databus. There are also a set of 8 mini LED indicators for each bus.
 
 Programme Counter (PCHI and PCLO)
 
