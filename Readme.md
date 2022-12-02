@@ -10,11 +10,11 @@ Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series
 * 3 General purpose 8 bit registers (A,X,Y) One interrupt / jump vector register (V)
 * 2 Internal 8 bit registers (H,L) for ALU input and microcode use only.
 * Constants register, giving 0,1 or -1 (0xff)
-* Conditional jumps and subroutine returns
+* Conditional / Unconditional short and long jumps; subroutine returns.
 * Combined Decrment/Test/Compare and branch instructions
 * Memory Mapped I/O for PS2 Keyboard and 4x20 line LCD display
 * Simple interrupt handling
-* 8 bit, 16 bit, 8 bit plus offset, 16 bit plus offset addressing modes.
+* 8 bit, 16 bit, 8 bit plus offset, 16 bit plus offset, 8 bit pre-decrement and post-increment addressing modes.
 * 270 different op codes
 * Runs at about 800Khz; 4 cycles per microcode instruction, each instruction 2-8 microcodes, so 8-32 clock cycles.
 * Arduino Nano as boot / RAM loader; slow clock for debug
