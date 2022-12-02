@@ -20,13 +20,13 @@ The control lines for the data going ON to the bus are as follows :-
 7. PCLO PC Low Register Out. Bottom 8 bits of programme counter to address bus.
 8. EO Sum Out. ALU result to databus. Result depends on which operation is selected, ties to bottom 3 bits of the opcode.
 9. SO Add Out. ALU Addition result to databus. May or may not set flags depending on opcode.
-10.KO Constants register to databus. Sends 0, 1 or 0xff (-1) depending on opcode.
+10. KO Constants register to databus. Sends 0, 1 or 0xff (-1) depending on opcode.
 11. FO Flags Out. Flags to D0,D1 of databus. Also interrupt status on D2, D3.
 12. AO A Register Out. A register onto databus
 13. VO Vector Register Out. Vector register onto databus.
 14. STO Stack Pointer Out. Stack Pointer to databus.
 15. MO Memory Out. Reads memory using AH and AL registers
-16 MTO Stack Out. Stack pointer is decremented. Puts contects of memory pointed to by stack pointer onto databus. 
+16. MTO Stack Out. Stack pointer is decremented. Puts contects of memory pointed to by stack pointer onto databus. 
 
 There are also 16 control line for the data to be read FROM the bus as follows :-
 1.  VI Vector Register from databus
@@ -44,7 +44,7 @@ There are also 16 control line for the data to be read FROM the bus as follows :
 13. FI Flags in (from D0 and D1 only)
 14. SR Instruction Reset; no read from databus
 15. MI Memory In. Reads memory using AH and AL registers
-16 MTI Stack in. Puts contents at memory pointed to by stack pointer. Stack pointer is incremented.
+16. MTI Stack in. Puts contents at memory pointed to by stack pointer. Stack pointer is incremented.
 
 Each microcode has a maximum total of 8 steps. The 74HC193 step counter is reset to 0 when any instruction containing MI, PCLI, XI, AI or SR is completed.
 
