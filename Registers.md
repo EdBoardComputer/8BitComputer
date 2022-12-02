@@ -1,10 +1,14 @@
 # Registers
 
-There are 10 main registers in the design.
+There are 11 main registers in the design.
 
 X, Y, A and V registers are all essentially the same. They utilise a single 74HC574 IC with both sides connected to the databus.
 
 The H and L register are slightly different. They utilise a single 74HC574, with the input side connected to the databus. The output side is connected to the ALUBUSA (H Register) or ALUBUSB (L Register) and to two 74HC245 Buffers which connect back to the databus. There are also a set of 8 mini LED indicators for each bus.
+
+Constants Register (K)
+
+This is used internally to place 0, 1 or -1 (0xff) onto the databus, and is used by many different opcodes. It is very simply driven using D6 and D7 of the opcode, feeding an OR gate, the result of which is fed into D0 and an AND gate the result of which is fed into D1-D7, via 74HC245 onto the databus. If D6 and D7 are both 0 (opcodes 0 to 63) 0 is fed onto the databus. For opcodes 64-191 1 is fed onto the databus. For opcodes 192-255 0xff (255) is fed onto the databus.
 
 Programme Counter (PCHI and PCLO)
 
