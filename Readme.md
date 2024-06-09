@@ -11,7 +11,7 @@ Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series
 * 2 Internal 8 bit registers (H,L) for ALU input and microcode use only.
 * Constants register, giving 0,1 or -1 (0xff)
 * Conditional / Unconditional short and long jumps; subroutine returns.
-* Combined Decrment/Test/Compare and branch instructions
+* Combined Decrement/Test/Compare and branch instructions
 * Memory Mapped I/O for PS2 Keyboard and 4x20 line LCD display
 * Simple interrupt handling
 * 8 bit, 16 bit, 8 bit plus offset, 16 bit plus offset, 8 bit pre-decrement and post-increment addressing modes.
