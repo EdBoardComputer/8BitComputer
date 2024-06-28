@@ -33,6 +33,7 @@ Instruction  S3  S2  S1  S0   M  Carry Flag
 007 DEC       H   H   H   H   L  H
 ```
 Each of the ALU input signals are derived as follows :-
+```
 SUM AND (ADD, SO)
 SCI AND (SUB, CMP, INC)
 S0 NAND (DEC, OR, SUM)
@@ -40,30 +41,39 @@ S1 AND (SUM, INC)
 S2 AND (SUM, INC, OR)
 S3 AND (SCI, AND)
 M  NAND (OR, XOR, AND)
-
+```
 The Carry Input is derived as follows.
-
+```
 CONOFF NAND (ADD, SUB)
 CYX AND (CARRY FLAG, CONOFF)
 CIN XOR (SCI, CYX)
-
+```
 This forces the Carry Input LOW for SUB, CMP and INC. The Carry Input is taken from the Carry Flip Flop for ADD and SUB.
 
 The Carry Output is further processed as follows to derive the Carry Flag
-
+```
 SCD AND (SUB, CMP, DEC)
 COT1 XOR (Carry Out, SCD)
 CARRY FLAG AND (COT1, NOT (M) )
-
+```
 The ALU result is put on the databus by the EO instruction. The result depends on the bottom 3 bits of the opcode.
+
 000 Add (ALUBUSA+ALUBUSB) with Carry. Carry and Zero Flags affected
+
 001 Subtract (ALUBUSA-ALUBUSB) with Borrow (Carry Flag) Carry and Zero Flags affected
+
 010 Compare (Result of ALUBUSA-ALUBUSB, incoming carry ignored, but carry and zero affected by result)
+
 011 Or (ALUBUSA OR ALUBUSB) Carry reset, Zero flag set if result 0.
+
 100 XOR (ALUBUSA XOR ALUBUSB) Carry reset, Zero flag set if result 0.
+
 101 And (ALUBUSA AND ALUBUSB) Carry reset, Zero flag set if result 0.
+
 110 Increment (ALUBUSA) Carry flag set on overflow, Zero Flag set if result 0.
+
 111 Decrement (ALUBUSA) Carry flag set on undeflow, Zero Flag set if result 0.
+
 
 The SO instruction is also used to put the sum of (ALUBUSA + ALUBUSB) onto the databus, but this can be used regardless of opcode. This may or may not update the flags depending on D5 of the opcode. The status of the Carry flag is ignored at the start of the instruction.
 
