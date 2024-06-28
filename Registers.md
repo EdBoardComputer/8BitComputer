@@ -10,6 +10,7 @@ The input side of each register is connected to the data bus, and can be directl
 
 A Register and H Register, the output side is connected directly to ALUBUSA. A register is selected by default, H will be used if it is loaded during an instruction.
 The currently selected ALUBUSA contents can be put back onto the databus via a 74HC245.
+
 X Register and L Register, the output side is connected directly to ALUBUSB. X register is selected by default, L will be used if it is loaded during an instruction.
 The currently selected ALUBUSB contents can be put back onto the databus via a 74HC245.
 
