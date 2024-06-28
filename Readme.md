@@ -1,6 +1,6 @@
 # 8bit Breadboard Computer
 Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series.
-* 8 Bit Arithmetic unit, based on 2x 74HC181 for addition, subtraction, increment and decrement. Logic functions for AND, OR, XOR. Two simple hard wired shifters for left and right shift.
+* 8 Bit Arithmetic unit, based on 2x 74HC181 for addition, subtraction, increment and decrement. Logic functions for AND, OR, XOR. Two simple hard wired shifters for left and right shift. Bit read instruction.
 * Zero and Carry Flags.
 * 8K RAM and 8K EEPROM. 16 bit memory address bus, 8 bit data bus.
 * 16 Bit program counter, 8 bit stack pointer (uses memory from 0100-01ff hex like 6502cpu)
