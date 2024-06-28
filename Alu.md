@@ -1,8 +1,15 @@
 # Arithmetic and Logic Unit
 
-The ALU is fed via 2 8 bit internal registers named H and L. These are only used internally, their contents is undefined between instructions. The 'H' registers feeds ALUBUSA and the 'L' register feeds ALUBUSB.
+The ALU is based on two 8 bits busses, ALUBUSA and ALUBUSB. ALUBUSA is fed by the A register, or the H register if it has been loaded. ALUBUSB is fed by the X register or the L Rregister if it has been loaded.
 
-The two ALU busses are connected to two 74HC283 ICs for addition. Subtraction is via 2's complement arithmetic, using 8 off XOR gates as per Ben Eaters 8 bit computer. AND, OR and XOR logic is provided by banks of the appropriate gates, connected to the databus via 74HC245 bus drivers. The shift and rotate left and right instructions just hard wire the ALUBUSA across to the appropriate bits along with the optional carry bit or zero, depending on the opcode.
+The ALU has several ICs with different functions.
+
+The main addition, subtraction and logic operations are carried out by a pair of 74HC181 ALUs.
+The shift and rotate instructions are carried out by a pair of 74HC574 registers hard wired to shift left and right.
+The BIT instruction is carried out with a 74HC151. One of the 8 bits from ALUBUSA is selected using the lower 3 bits from ALUBUSB
+The zero flag is detected by a 4078 IC, which is an 8 input NOR gate, connected to the databus.
+The carry flag is set / reset by various signals from the ALU and associated ICs
+
 
 # Operational Logic and Flags
 
