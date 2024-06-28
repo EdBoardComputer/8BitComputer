@@ -55,7 +55,6 @@ D0  -  Carry Flag
 D1  -  Zero Flag
 D2  -  Keyboard Interrupt Status (Output Only)
 D3  -  Video Interupt Status (Future Expansion) (Output Only)
+D4 - D7 Undefined.
 ```
 
-
-D4 - D7 Undefined.
