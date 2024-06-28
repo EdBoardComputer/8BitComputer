@@ -25,10 +25,17 @@ D0 - Flags In fed from D0 of the databus.
 
 The zero flag is driven by a single 8 input NOR gate 4078 attached to the databus.
 
-There are two input buffers for the zero flag, one 74HC125
+There are two input buffers for the zero flag, one 74HC125, amd one 74HC367.
+```
+From 74HC125
+Result of NOR gate. Selected unless Flags in is active.
+From 74HC367
+D1 - Flags in fed from D1 of the databus.
+```
 
+# Flag Updating
 
-The Carry flag and Zero flag is updated from the carry bus when any of the following ALU functions are used.
+The Carry flag and Zero flag flip flop is updated from the appropriate bus when any of the following ALU functions are used.
 ```
 BIT Function
 ALU OUT (EO) - All ALU functions
