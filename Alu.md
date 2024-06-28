@@ -19,49 +19,60 @@ The carry flag is set / reset by various signals from the ALU and associated ICs
 
 The 74HC181 ALU is a complex IC with more functions available than needed, so some complex logic was required to access the correct function for each instruction.
 
-The lower 3 bits of the instruction are fed into a 74HC138 3-8 line decoder. This gives an active low signal for each of the 8 opcodes.
+The lower 3 bits of the opcode are fed into a 74HC138 3-8 line decoder. This gives an active low signal for each of the 8 opcodes. There is also an additonal stand alone sum operation (SO), which can be used by any opcode.
 
 ```
 Instruction  S3  S2  S1  S0   M  Carry Flag
-ADD           H   L   L   H   L  From Carry
-SUB           L   H   H   L   L  From Carry
-CMP           L   H   H   L   L  L
-OR            H   H   H   L   H  X
-XOR           L   H   H   L   H  X
-AND           H   L   H   H   H  X
-INC           L   L   L   L   L  L
-DEC           H   H   H   H   L  H
+000 ADD       H   L   L   H   L  From Carry
+001 SUB       L   H   H   L   L  From Carry
+002 CMP       L   H   H   L   L  L
+003 OR        H   H   H   L   H  X
+004 XOR       L   H   H   L   H  X
+005 AND       H   L   H   H   H  X
+006 INC       L   L   L   L   L  L
+007 DEC       H   H   H   H   L  H
 ```
+Each of the ALU input signals are derived as follows :-
+SUM AND (ADD, SO)
+SCI AND (SUB, CMP, INC)
+S0 NAND (DEC, OR, SUM)
+S1 AND (SUM, INC)
+S2 AND (SUM, INC, OR)
+S3 AND (SCI, AND)
+M  NAND (OR, XOR, AND)
+
+The Carry Input is derived as follows.
+
+CONOFF NAND (ADD, SUB)
+CYX AND (CARRY FLAG, CONOFF)
+CIN XOR (SCI, CYX)
+
+This forces the Carry Input LOW for SUB, CMP and INC. The Carry Input is taken from the Carry Flip Flop for ADD and SUB.
+
+The Carry Output is further processed as follows to derive the Carry Flag
+
+SCD AND (SUB, CMP, DEC)
+COT1 XOR (Carry Out, SCD)
+CARRY FLAG AND (COT1, NOT (M) )
+
 The ALU result is put on the databus by the EO instruction. The result depends on the bottom 3 bits of the opcode.
-000 Add (H+L) with Carry. Carry and Zero Flags affected
-001 Subtract (H-L) with Borrow (Carry Flag) Carry and Zero Flags affected
-010 Compare (Result of H-L, incoming carry ignored, but carry and zero affected by result)
-011 Or H or L Carry reset, Zero flag affected.
-100 XOR H XOR L Carry reset, Zero flag affected.
-101 And H AND L Carry reset, Zero flag affected.
-110 Shift / Rotate Right (H Register) Carry, Zero Flags affected.
-111 Shift / Rotate Left (H Register) Carry, Zero Flags affected.
+000 Add (ALUBUSA+ALUBUSB) with Carry. Carry and Zero Flags affected
+001 Subtract (ALUBUSA-ALUBUSB) with Borrow (Carry Flag) Carry and Zero Flags affected
+010 Compare (Result of ALUBUSA-ALUBUSB, incoming carry ignored, but carry and zero affected by result)
+011 Or (ALUBUSA OR ALUBUSB) Carry reset, Zero flag set if result 0.
+100 XOR (ALUBUSA XOR ALUBUSB) Carry reset, Zero flag set if result 0.
+101 And (ALUBUSA AND ALUBUSB) Carry reset, Zero flag set if result 0.
+110 Increment (ALUBUSA) Carry flag set on overflow, Zero Flag set if result 0.
+111 Decrement (ALUBUSA) Carry flag set on undeflow, Zero Flag set if result 0.
 
-The shift / rotate instruction is driven by D7 of the opcode.
+The SO instruction is also used to put the sum of (ALUBUSA + ALUBUSB) onto the databus, but this can be used regardless of opcode. This may or may not update the flags depending on D5 of the opcode. The status of the Carry flag is ignored at the start of the instruction.
 
-The SO instruction is also used to put the sum of H + L onto the databus, but this can be used regardless of opcode. This may or may not update the flags depending on D5 of the opcode. The status of the Carry flag is ignored at the start of the instruction.
+# BIT and Shift Instructions
 
-# Carry Flag Logic
+These instructions use the lower 2 bits of the opcode, and are shared with the VO (Vector Register Out) instruction.
 
-The carry flag result is driven by the same logic as the ALU operation, by a 74HC151 8 to 1 line multiplexor. 
+00 - V register is placed on the databus.
+01 - BIT instruction. BIT taken from ALUBUSA depending on ALUBUSB (0-7) and placed in Carry Flag
+10 - Shift or Rotate Right. If bit D7 of the opcode is 0 then 0 is shifted in, else contents of Carry Flag.
+11 - Shift or Rotate Left. If bit D7 of the opcode is 0 then 0 is shifted in, else contents of Carry Flag.
 
-Inputs 0-2 - Carry Flag Output from ALU
-Inputs 3-4 - Set to zero
-Input 5 - From CCF logic
-Input 6 - ALUBUSAd0 for shift right.
-Input 7 - ALUBUSAd7 for shift left.
-
-The output of this is clocked into a 74HC74 latch when the appropriate signal from EO FI or SO is received.
-
-# Zero Flag Logic
-
-This uses a single 74HC4078 8 input NOR gate directly connected to the databus. The output of this is clocked into a 74HC74 latch when the appropriate signal from EO FI or SO is received.
-
-# Flags Reading from Databus
-
-Both the flag inputs and D0/D1 bus signals are routed through a 74HC153 dual 4-1 multiplexor. This allows the FI signal to read the flags directly from the bus, and the SO signal to read the carry flag result direct from the ALU, rather than using the result from the 74HC151 multiplexor.
