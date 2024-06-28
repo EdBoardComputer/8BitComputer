@@ -15,7 +15,15 @@ The zero flag is detected by a 4078 IC, which is an 8 input NOR gate, connected 
 The carry flag is set / reset by various signals from the ALU and associated ICs
 
 
-# Operational Logic and Flags
+# ALU Operational Logic
+
+The 74HC181 ALU is a complex IC with more functions available than needed, so some complex logic was required to access the correct function for each instruction.
+
+The lower 3 bits of the instruction are fed into a 74HC138 3-8 line decoder. This gives a negative going signal for each of the 8 opcodes.
+
+Instruction  S3  S2  S1  S0  M  Carry Flag
+ADD          H    L   L   H  L  From Carry
+SUB          
 
 The ALU result is put on the databus by the EO instruction. The result depends on the bottom 3 bits of the opcode.
 000 Add (H+L) with Carry. Carry and Zero Flags affected
