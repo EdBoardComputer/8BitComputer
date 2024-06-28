@@ -5,9 +5,13 @@ The ALU is based on two 8 bits busses, ALUBUSA and ALUBUSB. ALUBUSA is fed by th
 The ALU has several ICs with different functions.
 
 The main addition, subtraction and logic operations are carried out by a pair of 74HC181 ALUs.
+
 The shift and rotate instructions are carried out by a pair of 74HC574 registers hard wired to shift left and right.
+
 The BIT instruction is carried out with a 74HC151. One of the 8 bits from ALUBUSA is selected using the lower 3 bits from ALUBUSB
+
 The zero flag is detected by a 4078 IC, which is an 8 input NOR gate, connected to the databus.
+
 The carry flag is set / reset by various signals from the ALU and associated ICs
 
 
