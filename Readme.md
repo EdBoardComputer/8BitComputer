@@ -1,6 +1,6 @@
 # 8bit Breadboard Computer
 Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series.
-* 8 Bit Arithmetic unit, based on 2x 74HC283 for addition and subtraction, plus conventional logic gates for AND, OR, XOR. Two simple hard wired shifters for left and right shift.
+* 8 Bit Arithmetic unit, based on 2x 74HC181 for addition, subtraction, increment and decrement. Logic functions for AND, OR, XOR. Two simple hard wired shifters for left and right shift.
 * Zero and Carry Flags.
 * 8K RAM and 8K EEPROM. 16 bit memory address bus, 8 bit data bus.
 * 16 Bit program counter, 8 bit stack pointer (uses memory from 0100-01ff hex like 6502cpu)
@@ -13,8 +13,8 @@ Here's my take on a breadboard computer, inspired by Ben Eater's You Tube Series
 * Conditional / Unconditional short and long jumps; subroutine returns.
 * Combined Decrement/Test/Compare and branch instructions
 * Memory Mapped I/O for PS2 Keyboard and 4x20 line LCD display
-* Simple interrupt handling
+* Simple interrupt handling, enable / disable interrupts
 * 8 bit, 16 bit, 8 bit plus offset, 16 bit plus offset, 8 bit pre-decrement and post-increment addressing modes.
-* 270 different op codes
-* Runs at about 800Khz; 4 cycles per microcode instruction, each instruction 2-8 microcodes, so 8-32 clock cycles.
+* 295 different op codes
+* Runs at 5Mhz; 5 cycles per microcode instruction, each instruction 2-8 microcodes, so 10-40 clock cycles.
 * Arduino Nano as boot / RAM loader; slow clock for debug
