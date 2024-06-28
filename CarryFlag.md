@@ -25,7 +25,7 @@ D0 - Flags In fed from D0 of the databus.
 
 The zero flag is driven by a single 8 input NOR gate 4078 attached to the databus.
 
-There are two input buffers for the zero flag, one 74HC125, amd one 74HC367.
+There are two input buffers for the zero flag, one 74HC125, and one 74HC367.
 ```
 From 74HC125
 Result of NOR gate. Selected unless Flags in is active.
@@ -46,3 +46,16 @@ FIS - Flags In
 SO - Sum Out, but only when bit 5 of the opcode is 0
 CCF - Complement Carry Flag.
 ```
+# Saving and Loading Flags
+
+The flags can be saved and loaded. The FO signal puts the flags onto the databus, along with the interrupt status. The FI signal loads the flags from the databus.
+```
+The flags are placed onto and read from the databus as follows.
+D0  -  Carry Flag
+D1  -  Zero Flag
+D2  -  Keyboard Interrupt Status (Output Only)
+D3  -  Video Interupt Status (Future Expansion) (Output Only)
+```
+
+
+D4 - D7 Undefined.
