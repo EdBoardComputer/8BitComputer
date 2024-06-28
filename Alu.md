@@ -57,32 +57,25 @@ COT1 XOR (Carry Out, SCD)
 CARRY FLAG AND (COT1, NOT (M) )
 ```
 The ALU result is put on the databus by the EO instruction. The result depends on the bottom 3 bits of the opcode.
-
+```
 000 Add (ALUBUSA+ALUBUSB) with Carry. Carry and Zero Flags affected
-
 001 Subtract (ALUBUSA-ALUBUSB) with Borrow (Carry Flag) Carry and Zero Flags affected
-
 010 Compare (Result of ALUBUSA-ALUBUSB, incoming carry ignored, but carry and zero affected by result)
-
 011 Or (ALUBUSA OR ALUBUSB) Carry reset, Zero flag set if result 0.
-
 100 XOR (ALUBUSA XOR ALUBUSB) Carry reset, Zero flag set if result 0.
-
 101 And (ALUBUSA AND ALUBUSB) Carry reset, Zero flag set if result 0.
-
 110 Increment (ALUBUSA) Carry flag set on overflow, Zero Flag set if result 0.
-
 111 Decrement (ALUBUSA) Carry flag set on undeflow, Zero Flag set if result 0.
-
+```
 
 The SO instruction is also used to put the sum of (ALUBUSA + ALUBUSB) onto the databus, but this can be used regardless of opcode. This may or may not update the flags depending on D5 of the opcode. The status of the Carry flag is ignored at the start of the instruction.
 
 # BIT and Shift Instructions
 
 These instructions use the lower 2 bits of the opcode, and are shared with the VO (Vector Register Out) instruction.
-
+```
 00 - V register is placed on the databus.
 01 - BIT instruction. BIT taken from ALUBUSA depending on ALUBUSB (0-7) and placed in Carry Flag
 10 - Shift or Rotate Right. If bit D7 of the opcode is 0 then 0 is shifted in, else contents of Carry Flag.
 11 - Shift or Rotate Left. If bit D7 of the opcode is 0 then 0 is shifted in, else contents of Carry Flag.
-
+```
