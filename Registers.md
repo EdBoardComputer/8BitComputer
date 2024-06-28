@@ -14,7 +14,7 @@ The currently selected ALUBUSA contents can be put back onto the databus via a 7
 X Register and L Register, the output side is connected directly to ALUBUSB. X register is selected by default, L will be used if it is loaded during an instruction.
 The currently selected ALUBUSB contents can be put back onto the databus via a 74HC245.
 
-The status of which registers to use is tracked via two flip flops contained in 74HC74. These are set when either the H o L register is loaded, and cleared at the start of a new instruction, or after the ALU output has been read.
+The status of which registers to use is tracked via two flip flops contained in 74HC74. These are set when either the H or L register is loaded, and cleared at the start of a new instruction, or after the ALU output has been read.
 
 The Y register is uses 2 74HC574 ICs. Both are loaded concurrently from the databus. The output of one is connected to the databus, the output of the other is connected to the lower 8 bits of the address bus. This is used unless the Address Low register is loaded during an instruction.
 
