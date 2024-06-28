@@ -50,7 +50,7 @@ CIN XOR (SCI, CYX)
 ```
 This forces the Carry Input LOW for SUB, CMP and INC. The Carry Input is taken from the Carry Flip Flop for ADD and SUB.
 
-The Carry Output is further processed as follows to derive the Carry Flag
+The Carry Output from the ALU is further processed as follows to derive the Carry Flag
 ```
 SCD AND (SUB, CMP, DEC)
 COT1 XOR (Carry Out, SCD)
