@@ -19,12 +19,19 @@ The carry flag is set / reset by various signals from the ALU and associated ICs
 
 The 74HC181 ALU is a complex IC with more functions available than needed, so some complex logic was required to access the correct function for each instruction.
 
-The lower 3 bits of the instruction are fed into a 74HC138 3-8 line decoder. This gives a negative going signal for each of the 8 opcodes.
+The lower 3 bits of the instruction are fed into a 74HC138 3-8 line decoder. This gives an active low signal for each of the 8 opcodes.
 
-Instruction  S3  S2  S1  S0  M  Carry Flag
-ADD          H    L   L   H  L  From Carry
-SUB          
-
+```
+Instruction  S3  S2  S1  S0   M  Carry Flag
+ADD           H   L   L   H   L  From Carry
+SUB           L   H   H   L   L  From Carry
+CMP           L   H   H   L   L  L
+OR            H   H   H   L   H  X
+XOR           L   H   H   L   H  X
+AND           H   L   H   H   H  X
+INC           L   L   L   L   L  L
+DEC           H   H   H   H   L  H
+```
 The ALU result is put on the databus by the EO instruction. The result depends on the bottom 3 bits of the opcode.
 000 Add (H+L) with Carry. Carry and Zero Flags affected
 001 Subtract (H-L) with Borrow (Carry Flag) Carry and Zero Flags affected
