@@ -46,5 +46,5 @@ This is an 74HC273 connected to the databus, the output feeds the 74HC245 buffer
 
 ## Instruction Register (I)
 
-This is a single 74HC273, the input is connected to the databus, the output is connected to a 74HC574 register. This is then connected to A3 - A10 on the microcode EEPROM. The reset line is driven by logic, which detects microcode instructions containing SR (Forced instruction reset), XI (X Register Input), MI (Memory Input) or AI (A Register Input) are processed.
+This is a single 74HC273, the input is connected to the databus, the output is connected to a 74HC574 register. This is then connected to A3 - A10 on the microcode EEPROM. The reset line is driven by logic, which detects microcode instructions containing SR (Forced instruction reset), XI (X Register Input), MI (Memory Input), PCLI (Program Counter Low Input) or AI (A Register Input) are processed.
 
