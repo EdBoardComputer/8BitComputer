@@ -22,9 +22,24 @@ The Counter reset signal is derived from
 JCReset OR(Q5, Cold Reset)
 
 This forces a counter reset when the reset line is high, and does not interfere with the normal counter reset during operation.
+
+The Clock enable line is also connected to the Cold reset, disabling the count.
 ```
-The following chips are reset or disabled by the HOT reset
+The following chips are reset or disabled by the HOT reset line.
 ```
-Instruction Step Counter 74HC174
+Instruction Step Buffer 74HC174
 Output Decoder 74HC138 (Disabled)
 Input Decoder 74HC238 (Disabled)
+Address Low OR Y Register Flip Flop (Reset)
+Carry Flag Flip Flop (Reset)
+Flag Buffers (Reset)
+Program Counters 4x 74HC161 (Reset)
+Interrupt Flip Flop 74HC74
+```
+The following chips are reset of disabled by the COLD reset line.
+```
+Stack Pointer 2x 74HC193 (Reset)
+Instruction Step Counter 74HC193 (Reset)
+Output Decoder 74HC138 (Disabled)
+Input Decoder 74HC138 (Disabled)
+```
