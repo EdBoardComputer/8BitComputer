@@ -2,6 +2,8 @@
 
 There are 13 main registers in the design.
 
+## Working Registers
+
 The main registers in the design are A, X, Y, V, H and L.
 
 A, X, Y, and V are accessible via assembly language opcodes. H and L are for internal use within opcodes only. All registers use a single 74HC574 IC as storage.
