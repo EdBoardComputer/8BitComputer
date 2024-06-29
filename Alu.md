@@ -56,7 +56,7 @@ SCD AND (SUB, CMP, DEC)
 COT1 XOR (Carry Out, SCD)
 CARRY FLAG AND (COT1, NOT (M) )
 ```
-The ALU result is put on the databus by the EO instruction. The result depends on the bottom 3 bits of the opcode.
+The ALU result is put on the databus by the EO instruction. The function depends on the bottom 3 bits of the opcode.
 ```
 000 Add (ALUBUSA+ALUBUSB) with Carry. Carry and Zero Flags affected
 001 Subtract (ALUBUSA-ALUBUSB) with Borrow (Carry Flag) Carry and Zero Flags affected
