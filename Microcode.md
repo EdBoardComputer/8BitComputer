@@ -12,7 +12,8 @@ The microcode is built around the notion that the computer must (at a basic leve
 
 The control lines for the data going ON to the bus are as follows :-
 ```
-1. PMO  Programme Counter / Memory Out (Puts next byte onto bus pointed to by the programme counter, also increments the programme counter)
+1. PMO  Programme Counter / Memory Out (Puts next byte onto databus pointed to by the programme counter,
+   also increments the programme counter)
 2. XLO X or L Register Out. X register onto databus, or L register if previously loaded in the instruction.
 3. YO Y Register Out. Y register onto databus
 4. CCF Complements Carry Flag
@@ -46,7 +47,7 @@ There are also 16 control line for the data to be read FROM the bus as follows :
 13. FI Flags in (from D0 and D1 only)
 14. SR Instruction Reset; no read from databus
 15. MI Memory In. Reads memory using AHI for the upper 8 bits (zero if not loaded) and ALI register if loaded, otherwise Y register to lower 8 bits.
-16. MTI Stack in. Puts contents at memory pointed to by stack pointer. Stack pointer is incremented.
+16. MTI Stack in. Puts contents at memory pointed to by stack pointer. Stack pointer is then incremented.
 ```
 Each microcode has a maximum total of 8 steps. The 74HC193 step counter is reset to 0 when any instruction containing MI, PCLI, XI, AI or SR is completed.
 
@@ -56,7 +57,7 @@ To go beyond the 256 instruction limit, the wasted steps after all the two step 
 
 # Interrupts
 
-These are simply implemented by changing the data loaded into the 74HC193 step counter at the start of the next instruction to start from step 2 of the first instruction. Opcode 0x00 is NOP, which is Loads instruction register as step 0, and reset is step 1.
+These are simply implemented by setting D2 of the data loaded into the 74HC193 step counter at the start of the next instruction to start from step 2 of the first instruction. Opcode 0x00 is NOP, which is Loads instruction register as step 0, and reset is step 1.
 ```
 1. Step 2 - Flags In / Flags Out. This resets the interrupt flip flop to indicate the interrupt is being serviced, and stops any other interrupts from happening.
 2. Step 3 - The lower Program Counter is saved to the stack.
