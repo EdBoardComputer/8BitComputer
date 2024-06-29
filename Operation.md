@@ -8,11 +8,22 @@ Actions at each step of the Johnson Counter
 ```
 T1 Rising Edge - Buffer for next microcode address loaded from instruction register and step counter.
                - Program Counter loaded to buffer.
+
 NOT T1 Falling Edge - Microcode output disabled. Output Decoders disabled.
 
-NOT T1 Rising Edge - Microcode output enabled. Output Decoders enabled. Address loaded to Address bus if Memory Read is required.
+NOT T1 Rising Edge - Microcode output enabled. Output Decoders enabled.
+                     Address loaded to Address bus if Memory Read or Write is required.
 
-NOT T2 Rising Edge - ALU Outputs Updated. Flag Status Updated. Stack pointer predecremented if required. Instruction Register incremented.
+NOT T2 Rising Edge - ALU Output buffers Updated.
+                   - Flag Status Updated.
+                   - Stack pointer decremented if required.
+                   - Instruction Register incremented.
+
 NOT T3 Falling Edge - Input Decoders enabled.
 
 NOT T3 Rising Edge - RAM Writes Completed.
+                   - Input Decoders disabled, input reads completed.
+                   - Program Counter incremented if neccessary.
+
+NOT T4 Rising Edge - Stack Pointer Incremented if necessary.
+                   - AH and XL Flip Flops Reset so A and X point to ALUBUSA and B respectively, if ALU Read has been done.
