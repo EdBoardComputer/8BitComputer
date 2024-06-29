@@ -16,14 +16,21 @@ NOT T1 Rising Edge - Microcode output enabled. Output Decoders enabled.
 
 NOT T2 Rising Edge - ALU Output buffers Updated.
                    - Flag Status Updated.
-                   - Stack pointer decremented if required.
+                   - Stack pointer decremented if stack is being read.
                    - Instruction Register incremented.
 
-NOT T3 Falling Edge - Input Decoders enabled. Input Reads completed, for 74HC238
+NOT T3 Falling Edge - Input Decoders enabled. Input Reads completed, for 74HC238 and Instruction Register
 
 NOT T3 Rising Edge - RAM Writes Completed.
-                   - Input Decoders disabled
-                   - Program Counter incremented if neccessary.
+                   - Input Decoders disabled.
+                   - Program Counter and Stack Pointer load completed if necessary
+                   - Program Counter incremented if necessary.
 
-NOT T4 Rising Edge - Stack Pointer Incremented if necessary.
+T4 Rising Edge     - Carry and Zero Flags Stored in Flip Flops, if any of the following are used :-
+                      1 - Set, Clear or Compliment Carry Flag.
+                      2 - Shift or Rotate Left or Right.
+                      3 - Flags In
+                      4 - ALU Out or Sum Out if D3 of opcode = 1
+
+NOT T4 Rising Edge - Stack Pointer Incremented if stack has been written to.
                    - AH and XL Flip Flops Reset so A and X point to ALUBUSA and B respectively, if ALU Read has been done.
