@@ -11,10 +11,9 @@ Each microcode has 2 parts, location of data onto the bus in the lower nibble, a
 
 A sample instruction set for `ADCA(M+Y)`
 * PMO+II  Read next instruction into instruction register. (This is effectively only ever read from EPROM address 0, but included before each instruction for completeness.
-* PMO+HI  Read the offset byte into H register
-* YO+LI   Read the Y register into the L register
-* SO+ALI  Read the sum into the Address Register Low
-* AO+HI   Read the A register into the H register
+* PMO+HI  Read the offset byte into H register. H register selected for ALUBUSA
+* YO+LI   Read the Y register into the L register. L register selected for ALUBUSB
+* SO+ALI  Read the sum into the Address Register Low. ALUBUSA Reset to A register, ALUBUSB reset to X Register. Memory Bus Low set to Address Register Low.
 * MO+LI   Read the memory into the L Register.
 * EO+AI   Read the result (sum) into the A register, and reset instruction counter because of AI load.
 * Dummy   Spare instruction not used.
