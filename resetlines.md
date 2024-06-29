@@ -22,3 +22,9 @@ The Counter reset signal is derived from
 JCReset OR(Q5, Cold Reset)
 
 This forces a counter reset when the reset line is high, and does not interfere with the normal counter reset during operation.
+```
+The following chips are reset or disabled by the HOT reset
+```
+Instruction Step Counter 74HC174
+Output Decoder 74HC138 (Disabled)
+Input Decoder 74HC238 (Disabled)
