@@ -19,10 +19,10 @@ NOT T2 Rising Edge - ALU Output buffers Updated.
                    - Stack pointer decremented if required.
                    - Instruction Register incremented.
 
-NOT T3 Falling Edge - Input Decoders enabled.
+NOT T3 Falling Edge - Input Decoders enabled. Input Reads completed, for 74HC238
 
 NOT T3 Rising Edge - RAM Writes Completed.
-                   - Input Decoders disabled, input reads completed.
+                   - Input Decoders disabled
                    - Program Counter incremented if neccessary.
 
 NOT T4 Rising Edge - Stack Pointer Incremented if necessary.
