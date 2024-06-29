@@ -57,7 +57,7 @@ To go beyond the 256 instruction limit, the wasted steps after all the two step 
 
 # Interrupts
 
-These are simply implemented by setting D2 of the data loaded into the 74HC193 step counter at the start of the next instruction to start from step 2 of the first instruction. Opcode 0x00 is NOP, which is Loads instruction register as step 0, and reset is step 1.
+These are simply implemented by setting D2 of the data loaded into the 74HC193 step counter at the start of the next instruction to start from step 2 of the first instruction. 
 ```
 1. Step 2 - Flags In / Flags Out. This resets the interrupt flip flop to indicate the interrupt is being serviced, and stops any other interrupts from happening.
 2. Step 3 - The lower Program Counter is saved to the stack.
