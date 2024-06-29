@@ -2,7 +2,7 @@
 
 There are 13 main registers in the design.
 
-## Working Registers
+## Working Registers - (A, X, Y, V, H and L)
 
 The main registers in the design are A, X, Y, V, H and L.
 
@@ -24,27 +24,27 @@ The V regsiter has the input and output sides connected to the address bus.
 
 There is a set of 8 mini LEDs to show the status of ALUBUSA, ALUBUSB and the ALU Output.
 
-Constants Register (K)
+## Constants Register (K)
 
 This is used internally to place 0, 1 or -1 (0xff) onto the databus, and is used by many different opcodes. It is very simply driven using D6 and D7 of the opcode, feeding an OR gate, the result of which is fed into D0 and an AND gate the result of which is fed into D1-D7, via 74HC245 onto the databus. If D6 and D7 are both 0 (opcodes 0 to 63) 0 is fed onto the databus. For opcodes 64-191 1 is fed onto the databus. For opcodes 192-255 0xff (255) is fed onto the databus.
 
-Programme Counter (PCHI and PCLO)
+## Programme Counter (PCHI and PCLO)
 
 These are implemented with 4 74HC161 counters, cascaded together so the increment input on the lowest will ripple through the others. The Programme Counter is automatically incremented each time it is output onto the databus. The input sides are connected directly to the databus. Each pair of output sides is connected to the databus via 74HC245 buffer, and to the address bus by a 74HC574 register.
 
-Stack Pointer
+## Stack Pointer (ST)
 
 This is implemented with 2 74HC193 counters, cascaded together with increment and decrement inputs. The input sides are connected directly to the databus, the output sides to the databus via 74HC245 and the lower address bus via 74HC245 buffer.
 
-Address Low Register
+## Address Low Register (AL)
 
 This is an 74HC574 connected between the databus and low 8 bits of the address bus.
 
-Address High Register
+## Address High Register (AH)
 
 This is an 74HC273 connected to the databus, the output feeds the 74HC245 buffer which is connected to the upper 8 bits of the address bus. The 74HC273 reset line is tied to the Instruction register In control, this clears the high address register on each instruction start.
 
-Instruction Register
+## Instruction Register (I)
 
 This is a single 74HC273, the input is connected to the databus, the output is connected to a 74HC574 register. This is then connected to A3 - A10 on the microcode EEPROM. The reset line is driven by logic, which detects microcode instructions containing SR (Forced instruction reset), XI (X Register Input), MI (Memory Input) or AI (A Register Input) are processed.
 
