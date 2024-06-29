@@ -15,5 +15,5 @@ A sample instruction set for `ADCA(M+Y)`
 * `YO+LI`   Read the Y register into the L register. L register selected for ALUBUSB
 * `SO+ALI`  Read the sum into the Address Register Low. ALUBUSA Reset to A register, ALUBUSB reset to X Register. Memory Bus Low set to Address Register Low.
 * `MO+LI`   Read the memory into the L Register.
-* `EO+AI`   Read the result (sum) into the A register, and reset instruction counter because of AI load.
+* `EO+AI`   Read the result (sum) into the A register, and reset microcode instruction counter because of AI load.
 * `Dummy`   Spare instruction not used.
